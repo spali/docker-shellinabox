@@ -9,11 +9,6 @@ declare -a vars=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{prin
 declare -a urls=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{print $2}') )
 IFS=$'\n' apps=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{print substr($0, index($0,$3))}') )
 
-
-#[ -n "$SHELLINABOX_SERVICE_LOCAL" ] && urls[${#urls[@]}]="local" && apps[${#apps[@]}]="LOGIN"
-#[ -n "$SHELLINABOX_SERVICE_HOST" ] && urls[${#urls[@]}]="$SHELLINABOX_SERVICE_HOST" && apps[${#apps[@]}]="SSH:$DOCKER_HOST"
-#[ -n "$SHELLINABOX_SERVICE_WHO" ] && urls[${#urls[@]}]="$SHELLINABOX_SERVICE_WHO" && apps[${#apps[@]}]="nobody:nogroup:/:w | awk '{ if($8!=\"w\") print $0 }'"
-
 # add dummy service if no service is enabled
 [ ${#vars[@]} -lt 1 ] && vars[0]="" && surls[0]="" && apps[0]="nobody:nogroup:/:echo NO SERVICE DEFINED, PLEASE DEFINE SOME TO BE USEFUL"
 
@@ -27,10 +22,8 @@ for ((i = 0; i < ${#vars[@]}; i++)); do
         # add default without url
         [ -n "$SHELLINABOX_DEFAULT" ] && [ "$SHELLINABOX_DEFAULT" == "${urls[$i]}" ] && cmd+=" -s \"/:${apps[$i]}\""
 done
-echo "Starting: $cmd"
 
-eval $cmd \
-                    $(for i in $(ls /etc/shellinabox/options-enabled/*.css |
+declare user_css=$(for i in $(ls /etc/shellinabox/options-enabled/*.css |
                                  sed -e                                       \
                                     's/.*[/]\([0-9]*\)[-_+][^/:,;]*[.]css/\1/'|
                                  sort -u); do
@@ -44,4 +37,10 @@ eval $cmd \
                       sed -e 's/;$//
                               //b
                               s/.*/--user-css "\0"/')
+
+cmd+=" $user_css"
+
+echo "Starting: $cmd"
+
+eval $cmd
 
