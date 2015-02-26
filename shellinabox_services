@@ -1,0 +1,5 @@
+# var name			url	application
+SHELLINABOX_SERVICE_LOCAL	local	LOGIN
+SHELLINABOX_SERVICE_HOST	host	SSH:$DOCKER_HOST
+SHELLINABOX_SERVICE_WHO		who	nobody:nogroup:/:w
+
