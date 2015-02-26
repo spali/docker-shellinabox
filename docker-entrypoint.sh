@@ -20,7 +20,7 @@ if [ "$1" = '/docker-command.sh' ]; then
 		fi
 	fi
 	unset SHELLINABOX_PASSWORD
-fi      
+fi
 
 exec $@
 

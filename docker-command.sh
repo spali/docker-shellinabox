@@ -2,8 +2,8 @@
 set -e
 
 declare cmd="shellinaboxd --user shellinabox --group shellinabox"
-                                                                                                                                                                                                                   
-[ -n "$SHELLINABOX_DISABLE_SSL" ] && cmd+=" --disable-ssl"                                                                                                                                                         
+
+[ -n "$SHELLINABOX_DISABLE_SSL" ] && cmd+=" --disable-ssl"
 
 declare -a vars=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{print $1}') )
 declare -a urls=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{print $2}') )
@@ -29,7 +29,7 @@ for ((i = 0; i < ${#vars[@]}; i++)); do
 done
 echo "Starting: $cmd"
 
-eval $cmd \                                                                                                                                                                                                        
+eval $cmd \
                     $(for i in $(ls /etc/shellinabox/options-enabled/*.css |
                                  sed -e                                       \
                                     's/.*[/]\([0-9]*\)[-_+][^/:,;]*[.]css/\1/'|

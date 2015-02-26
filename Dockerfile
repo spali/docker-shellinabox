@@ -2,8 +2,8 @@ FROM ubuntu:14.04
 
 #######################################################################################
 
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added                                                                                     
-RUN groupadd -r shellinabox && useradd -r -g shellinabox shellinabox 
+# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+RUN groupadd -r shellinabox && useradd -r -g shellinabox shellinabox
 
 RUN apt-get update && apt-get -y install shellinabox ssh
 
