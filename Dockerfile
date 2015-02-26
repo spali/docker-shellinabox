@@ -5,7 +5,7 @@ FROM ubuntu:14.04
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r shellinabox && useradd -r -g shellinabox shellinabox
 
-RUN apt-get update && apt-get -y install shellinabox ssh
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install shellinabox ssh
 
 COPY shellinabox_services /shellinabox_services
 RUN chmod 600 /shellinabox_services
