@@ -34,6 +34,9 @@ you should set this to your password for the user. if you define a user but omit
 set this variable to anything non empty to automatically add the user defined by SHELLINABOX_USER to the sudo group which can switch to root.
 Use this with caution, most won't need this, because they access any way to some other container or host. But it can be useful for example to install utilities in the container.
 
+#####SHELLINABOX_INSTALL_PKGS
+set this variable to a comma delimited list of debian package names to be installed at first start of the container. Useful to install some basic tools like vi etc. in container to provide it to the users in the local service.
+
 #####SHELLINABOX_DEFAULT
 set the default service to be used. This service will be available at the root of the web server. Set this to the same value as one of the service environment variables above.
 

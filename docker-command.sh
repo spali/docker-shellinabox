@@ -5,6 +5,7 @@ declare cmd="shellinaboxd --user shellinabox --group shellinabox"
 
 [ -n "$SHELLINABOX_DISABLE_SSL" ] && cmd+=" --disable-ssl"
 
+# parse service file
 declare -a vars=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{print $1}') )
 declare -a urls=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{print $2}') )
 IFS=$'\n' apps=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{print substr($0, index($0,$3))}') )
@@ -12,9 +13,9 @@ IFS=$'\n' apps=( $(grep -vE "^(\s*#.*|\s*)$" shellinabox_services  | awk '{print
 # add dummy service if no service is enabled
 [ ${#vars[@]} -lt 1 ] && vars[0]="" && surls[0]="" && apps[0]="nobody:nogroup:/:echo NO SERVICE DEFINED, PLEASE DEFINE SOME TO BE USEFUL"
 
+# build service argument
 for ((i = 0; i < ${#vars[@]}; i++)); do
 	option=$(eval echo "\$${vars[$i]}")
-	#printf "  %s=%s -> %s:%s\n" "${vars[$i]}" "$option" "${urls[$i]}" "${apps[$i]}"
 	if [ -n "$option" ]; then
 		urls[$i]="$option"
 	fi

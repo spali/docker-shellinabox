@@ -5,7 +5,7 @@ FROM debian:wheezy
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r shellinabox && useradd -r -g shellinabox shellinabox
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install shellinabox ssh
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install shellinabox ssh sudo
 
 COPY shellinabox_services /shellinabox_services
 RUN chmod 600 /shellinabox_services
