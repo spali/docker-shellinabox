@@ -13,7 +13,7 @@ if [ "$1" = '/docker-command.sh' ]; then
 	export DOCKER_HOST=$(/sbin/ip route|awk '/default/ { print $3 }')
 	echo "discovered docker host: $DOCKER_HOST"
 
-	if [ -n "$SHELLINABOX_USER" ] && id -u "$SHELLINABOX_USER" >/dev/null 2>&1; then
+	if [ -n "$SHELLINABOX_USER" ] && ! id -u "$SHELLINABOX_USER" >/dev/null 2>&1; then
 		echo "creating user: $SHELLINABOX_USER"
 		if [ -n "$SHELLINABOX_ALLOW_SUDO" ]; then
 			useradd -m -g users -G sudo $SHELLINABOX_USER
