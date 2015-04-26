@@ -52,6 +52,6 @@ docker run -d --name shellinabox -p 4200:4200 -e SHELLINABOX_DISABLE_SSL=1 spali
 #####Full example
 This example contains all possible options you can define. It starts a container without ssl, and all predefined services (accesing docker host, accessing container itself and a who is connected implementation).
 ```
-docker run -d --name shellinabox -p 4200:4200 -e SHELLINABOX_SERVICE_HOST=host -e SHELLINABOX_SERVICE_WHO=who -e SHELLINABOX_SERVICE_LOCAL=local -e SHELLINABOX_ALLOW_SUDO=1 -e SHELLINABOX_USER=myuser -e SHELLINABOX_PASSWORD=mypassword -e SHELLINABOX_DISABLE_SSL=1 SHELLINABOX_DEFAULT=host spali/shellinabox
+docker run -d --name shellinabox -p 4200:4200 -e SHELLINABOX_SERVICE_HOST=host -e SHELLINABOX_SERVICE_WHO=who -e SHELLINABOX_SERVICE_LOCAL=local -e SHELLINABOX_ALLOW_SUDO=1 -e SHELLINABOX_USER=myuser -e SHELLINABOX_PASSWORD=mypassword -e SHELLINABOX_DISABLE_SSL=1 -e SHELLINABOX_DEFAULT=host spali/shellinabox
 ```
 
